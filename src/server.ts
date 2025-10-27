@@ -6,6 +6,8 @@ import fastifySwagger from "@fastify/swagger";
 import fastifyJwt from "@fastify/jwt";
 import { env } from "./env/env";
 import fastifyCors from "@fastify/cors";
+import { clientesRoutes } from "./routes/clientes.routes";
+import { AuthRoutes } from "./routes/auth.routes";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -60,6 +62,8 @@ app.register(fastifyCors, {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 });
 
+app.register(clientesRoutes)
+app.register(AuthRoutes)
 
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
