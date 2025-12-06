@@ -8,6 +8,7 @@ import { env } from "./env/env";
 import fastifyCors from "@fastify/cors";
 import { clientesRoutes } from "./routes/clientes.routes";
 import { AuthRoutes } from "./routes/auth.routes";
+import {AgendamentoRoutes} from "./routes/agendamento.routes.ts";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -54,7 +55,7 @@ app.register(fastifySwagger, {
 
 app.register(fastifyCors, {
   origin: [
-    env.AMBIENTE_SIGRA === 'dev' ?
+    env.AMBIENTE === 'dev' ?
       '*' :
       'https://app.sigra.com.br', 'https://hom.sigra.com.br/',
     'https://dev.sigra.com.br/'
@@ -64,6 +65,7 @@ app.register(fastifyCors, {
 
 app.register(clientesRoutes)
 app.register(AuthRoutes)
+app.register(AgendamentoRoutes)
 
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',

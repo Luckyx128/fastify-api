@@ -30,13 +30,13 @@ export function createSwaggerSchema({
 }: SwaggerRouteOptions) {
     return {
         schema: {
-            headers: header ? header : tag != 'Login' ? headerSchema : NoHeaderSchema,
+            headers: header ? header : !['Login', 'Agendamento'].includes(tag) ? headerSchema : NoHeaderSchema,
             tags: [tag],
             summary,
             description: description ?? summary,
             body,
-            params,
-            querystring,
+            params: params ?? z.object({}),
+            querystring: querystring ?? z.object({}),
             response,
         },
         exposeHeadRoute: false,

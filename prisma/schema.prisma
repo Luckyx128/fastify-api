@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,3 +14,12 @@ model User {
   createdAt DateTime @default(now())
 }
 
+model Agendamento {
+  id              Int      @id @default(autoincrement())
+  name            String
+  phone_number    String
+  email           String   @unique
+  scheduling_date DateTime
+  id_service      Int
+  createdAt       DateTime @default(now())
+}
